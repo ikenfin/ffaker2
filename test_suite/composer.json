@@ -1,0 +1,11 @@
+{
+	"require" : {
+		"doctrine/dbal": "2.5.x-dev",
+		"phpunit/phpunit": "5.0.*"
+	},
+	"autoload": {
+		"classmap" : [
+			"vendor/ffaker"
+		]
+	}
+}

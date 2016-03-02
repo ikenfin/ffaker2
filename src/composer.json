@@ -1,0 +1,10 @@
+{
+	"require" : {
+		"doctrine/dbal": "2.5.x-dev"
+	},
+	"autoload": {
+		"classmap" : [
+			"vendor/ffaker"
+		]
+	}
+}
