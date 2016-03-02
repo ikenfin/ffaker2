@@ -4,6 +4,8 @@
 	
 	class FFaker extends \ffaker\FFakerBase {
 
+		const FFVersion = '0.0.1';
+
 		protected $struct = [];
 		protected $binded = [];
 

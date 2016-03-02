@@ -70,7 +70,7 @@
 				print_ffaker_help($value);
 				exit(0);
 			case 'v' :
-				echo "FinFaker php class [" . FinFaker::version() . "]\n";
+				echo "FFaker version [" . \ffaker\app\FFaker::version() . "]\n";
 				exit(0);
 			default:
 				break;

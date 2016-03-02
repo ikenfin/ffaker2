@@ -6,6 +6,8 @@
 	require dirname(__FILE__) . '/../autoload.php';
 
 	class FFakerBase {
+		
+		const FFVersion = '0.0.1';
 
 		protected $_conn;
 		protected $_connParams;
@@ -14,6 +16,10 @@
 			$this->_connParams = $connParams;
 			$conf = new \Doctrine\DBAL\Configuration();
 			$this->_conn = \Doctrine\DBAL\DriverManager::getConnection($connParams, $conf);
+		}
+
+		public static function version() {
+			return static::FFVersion;
 		}
 
 		public function getPrimaryKey($table) {

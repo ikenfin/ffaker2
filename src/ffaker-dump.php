@@ -58,7 +58,7 @@
 				$db_config = ['url' => $value];
 				break;
 			case 'v':
-				echo "FinFaker php class [" . FinFakerDumper::version() . "]\n";
+				echo "FFakerDumper version [" . \ffaker\app\FFakerDumper::version() . "]\n";
 				exit(0);
 		}
 	}

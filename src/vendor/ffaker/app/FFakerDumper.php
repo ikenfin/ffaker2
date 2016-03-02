@@ -4,7 +4,7 @@
 
 	class FFakerDumper extends \ffaker\FFakerBase {
 
-		const FFVersion = '0.0.4';
+		const FFVersion = '0.0.2';
 
 		protected $_exportTables = false;
 		protected $_exportTablesList = [];

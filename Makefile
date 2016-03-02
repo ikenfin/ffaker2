@@ -9,6 +9,7 @@ program: build_all
 
 install:
 	cp build/*.phar $(INSTALL_DIR)
+	echo "Installation complete"
 
 uninstall:
 	rm $(INSTALL_DIR)/ffaker.phar
