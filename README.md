@@ -62,3 +62,17 @@ You can use test sqlite3 db (test_suite/) for this example
 ```bash
 ffaker-dump.phar -d sqlite3:///test_db.sqlite3 -p | ffaker.phar -c 10 -i
 ```
+
+## Advanced usage
+
+See the [USAGE.md](USAGE.md) to get more instructions.
+
+## Contribute
+
+Programmers:
+
+Open to PR
+
+Non-programmers:
+
+As you can see English is not my main language, so if you can help me with documentation.
