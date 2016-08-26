@@ -80,7 +80,7 @@
 					->setMaxResults(1);
 				$q = $this->_conn->executeQuery($_qb->getSql());
 
-				$related = $q->fetchAll();
+				$related = $q->fetch();
 			}
 			catch(\Doctrine\DBAL\DBALException $e) {
 				// hacky solution for databases that doesnt support RAND() function
@@ -101,7 +101,7 @@
 
 					$q = $this->_conn->executeQuery($_qb->getSql());
 
-					$related = $q->fetchAll();
+					$related = $q->fetch();
 				}
 			}
 
@@ -134,7 +134,7 @@
 			}
 			else {
 				if(!$null)
-					throw new Exception("We cannot find anything to relate and field $name cannot be null!");	
+					throw new \Exception("We cannot find anything to relate and field $name cannot be null!");
 			}
 
 			return $value;
@@ -187,8 +187,7 @@
 				if($null)
 					return null;
 
-				throw new Exception("Cannot calculate expression: { $a_value $expr $b_value }");
-				
+				throw new \Exception("Cannot calculate expression: { $a_value $expr $b_value }");
 			}
 
 			$val = eval('return ' . $a_value . $expr . $b_value . ';');
@@ -199,7 +198,7 @@
 
 			if($val == null) {
 				if(!$null)
-					throw new Exception("Cannot calculate {$expression} because its given NULL and $name cannot be null!");
+					throw new \Exception("Cannot calculate {$expression} because its given NULL and $name cannot be null!");
 			}
 
 			return $val;
