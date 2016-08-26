@@ -5,6 +5,12 @@
 		This file is part of ffaker.phar project
 	*/
 
+	if(ini_get('phar.readonly') == TRUE) {
+		echo "Cannot build phar due to PHP settings!" . PHP_EOL;
+		echo "Please check \"phar.readonly\" setting to be \"Off\" in your php.ini!" . PHP_EOL;
+		exit(1);
+	}
+
 	$PHP_PATH = `which php`;
 
 	if(!$PHP_PATH) {
