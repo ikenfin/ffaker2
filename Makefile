@@ -5,7 +5,7 @@ INSTALL_DIR=/usr/local/bin
 .SILENT:
 
 program: build_all
-	echo "Done. Run make install as root to install phar into your system"
+	echo "Done. Run \`make install\` as root to install phar into your system"
 
 install:
 	cp build/*.phar $(INSTALL_DIR)
@@ -65,8 +65,8 @@ prepare_php: prepare_build
 
 	# install composer into test dir
 	cd pre_build/ && \
-	php -r "readfile('https://getcomposer.org/installer');" > composer-setup.php && \
-	php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === 'fd26ce67e3b237fffd5e5544b45b0d92c41a4afe3e3f778e942e43ce6be197b9cdc7c251dcde6e2a52297ea269370680') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); }" && \
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+	php -r "if (hash('SHA384', file_get_contents('composer-setup.php')) === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); exit(1); }" && \
 	php composer-setup.php && \
 	php -r "unlink('composer-setup.php');";
 
