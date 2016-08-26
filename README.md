@@ -69,10 +69,6 @@ See the [USAGE.md](USAGE.md) to get more instructions.
 
 ## Contribute
 
-Programmers:
-
-Open to PR
-
-Non-programmers:
-
 As you can see English is not my main language, so if you can help me with documentation.
+
+Also you can open issue [here](https://github.com/ikenfin/ffaker2/issues), and i open to your PR's!
