@@ -6,7 +6,7 @@
 	require dirname(__FILE__) . '/../autoload.php';
 
 	class FFakerBase {
-		
+
 		const FFVersion = '0.0.1';
 
 		protected $_conn;
@@ -24,7 +24,7 @@
 
 		public function getPrimaryKey($table) {
 			$indexes = $this->_conn->getSchemaManager()->listTableIndexes($table);
-			
+
 			foreach($indexes as $index) {
 				if($index->isPrimary()) {
 					$cols = $index->getColumns();

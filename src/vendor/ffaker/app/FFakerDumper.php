@@ -1,5 +1,5 @@
 <?php
-	
+
 	namespace ffaker\app;
 
 	class FFakerDumper extends \ffaker\FFakerBase {
@@ -8,7 +8,7 @@
 
 		protected $_exportTables = false;
 		protected $_exportTablesList = [];
-		
+
 		protected $outFormat = 'PHP';
 
 		public function __construct($connParams, array $exportTables = []) {
@@ -22,7 +22,7 @@
 
 		public function dump($outfile, $include_db_config = false, $outFormat = null) {
 			$struct = $this->dumpInternal();
-			
+
 			if($include_db_config) {
 				$struct['__db_config__'] = $this->_connParams;
 			}
@@ -37,7 +37,7 @@
 		protected function dumpInternal() {
 			$tables = $this->getTables();
 			$result = [];
-			
+
 			foreach($tables as $table) {
 				$tName = $table->getName();
 
@@ -54,20 +54,20 @@
 				$pk = $this->getPrimaryKey($tName);
 				$fields = $this->getFields($tName);
 				$fks = $this->getForeignKeys($tName);
-				
+
 				foreach($fields as $data) {
-					
+
 					$field = [];
 
 					if($data->getName() == $pk) {
 						$struct['pk'] = [$data->getName(), $data->getType()->getName(), 'auto' => $data->getAutoincrement()];
 						continue;
 					}
-					
+
 					$field[0] = $data->getType()->getName();
-					
+
 					$length = $data->getLength();
-					
+
 					if($length == null) {
 						$length = $data->getType()->getDefaultLength($this->_conn->getDatabasePlatform());
 					}
@@ -85,7 +85,7 @@
 						foreach($fks as $fk) {
 							$fCols = $fk->getForeignColumns();
 							$lCols = $fk->getLocalColumns();
-							
+
 							foreach($lCols as $i => $lCol) {
 								if($data->getName() == $lCol)
 									$field['related'] = $fk->getForeignTableName() . '.' . $fCols[$i];
@@ -105,7 +105,7 @@
 		public function generateFile($file, $struct) {
 			$file = fopen($file, 'w');
 			$outMethod = 'generate' . $this->outFormat;
-			
+
 			if(method_exists($this, $outMethod))
 				return call_user_func_array([$this, $outMethod], [$file, $struct]);
 			else $this->generatePHP($file);

@@ -1,7 +1,7 @@
 <?php
-	
+
 	namespace ffaker\app;
-	
+
 	class FFaker extends \ffaker\FFakerBase {
 
 		const FFVersion = '0.0.1';
@@ -38,7 +38,7 @@
 
 		public function generateString($size) {
 			$result = '';
-			
+
 			for($i = 0; $i < $size; $i++) {
 				$result .= $this->chars[$this->generateInteger(count($this->chars) - 1)];
 			}
@@ -50,7 +50,7 @@
 		*/
 		public function randomData($type, $size) {
 			$method = 'generate' . ucfirst($type);
-			
+
 			if(method_exists($this, $method)) {
 				return $this->{$method}($size);
 			}
@@ -63,7 +63,7 @@
 		public function findRandom($table, $null = false) {
 			if($null) {
 				$returnNull = rand(0, 1);
-				
+
 				if($returnNull)
 					return null;
 			}
@@ -89,7 +89,7 @@
 				$_qb->select('COUNT(*)')
 					->from($table);
 				$q = $this->_conn->executeQuery($_qb->getSql());
-				
+
 				$count = $q->fetchColumn();
 
 				if($count > 0) {
@@ -113,7 +113,7 @@
 		*/
 		public function relatedValue($name, $relation, $null=false) {
 			list($table, $field) = explode('.', $relation);
-			
+
 			if($table == 'self')
 				$table = $this->struct['__table__'];
 
@@ -177,10 +177,10 @@
 
 			if(!in_array($expr, $this->__supportedCalculateOperations))
 				throw new Exception("{ $expr } is not supported in calculatedValue! Supported operators: [" . implode(',', self::$__supportedCalculateOperations) . "]", 1);
-				
+
 			$a_value = $this->getValue($a_str, $null);
 			$b_value = $this->getValue($b_str, $null);
-			
+
 			if($a_value == null || $b_value == null) {
 				if($default !== null)
 					return $default;
@@ -215,7 +215,7 @@
 		*/
 		public function recognize($field, $struct_item) {
 			$auto = self::getArrayValue($struct_item, 'auto', false);
-			
+
 			if($auto == true)
 				return;
 
@@ -259,7 +259,7 @@
 					$this->recognize($key, $struct_item);
 				}
 
-				$result = $this->save($this->binded);
+				$result = $this->save();
 
 				if(is_callable($progressCallback))
 					call_user_func($progressCallback, $i+1, $count, $result);
@@ -269,7 +269,7 @@
 		/*
 			Save generated data
 		*/
-		public function save($values) {
+		public function save() {
 			$data = $this->binded;
 
 			if(isset($data['__related__']))
