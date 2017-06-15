@@ -26,8 +26,9 @@
 		return count(array_filter(array_keys($array), 'is_string')) == 0;
 	}
 
-	function print_ffaker_help($value = null) {
-		echo "FinFaker [" . FinFaker::version() . "] - php util to fill database with test data.\n\n";
+	function print_ffaker_help($value = null, $v = 'dev') {
+		echo "FinFaker [" . $v . "] - php util to fill database with test data.\n\n";
+		$script = CALL_SCRIPT_NAME;
 
 		switch($value) {
 
@@ -103,16 +104,19 @@ STRUCT_HELP;
 			default:
 				echo <<<HELP
 Options:
-	-i -- run program interactive (showing progress)
-	-d <filename> -- database connection config file. Type `" . CALL_SCRIPT_NAME . " -h=database` to get more info about
-	-s <filename> -- php file with table structure. Type `" . CALL_SCRIPT_NAME . " -h=structure` to get more info about
-	-w <filename> -- words file.
+	-d -- database connection url (if config packed in structure, this option isn't required)
+	-s -- database structure file (by default STDIN)
 	-c <number> -- count of items to create
+	-f - import config format (formats: j - JSON (default), s - Serialized php, p - PHP array)
+	-w <filename> -- words file.
+	-i -- run program interactive (showing progress)
 	-h -- call this menu
 		-h=database -- info about database config file
 		-h=structure -- info about php metadb structure file
 		-h=fields -- info about fields that can be used in structure file
-	-v -- show version
+	-v -- print version
+
+	Example: $script -d sqlite3:///./db.sqlite -s ./struct.json
 
 HELP;
 				break;
@@ -120,16 +124,25 @@ HELP;
 	}
 
 
-	function print_ffaker_dump_help() {
+	function print_ffaker_dump_help($v = 'dev') {
 		$script = CALL_SCRIPT_NAME;
 
-		echo "FinFakerDumper [" . FinFakerDumper::version() . "] - php util to dump database to FinFaker format.\n\n";
+		echo "FinFakerDumper [" . $v . "] - php util to dump database to FinFaker format.\n\n";
 		echo <<<HELP
 Usage:
 $script -d <database_config>
 FinFakerDumper prints result in stdout, so to save it into file use > operator
 
-	Example: $script -d db.php > struct.php
+Options:
+	-d -- database connection url (see http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url for details)
+	-w <filename> -- file to write dump (by default STDOUT)
+	-p -- pack database config into out structure
+	-t -- tables to export (format -t table1,table2,table3)
+	-f -- export config format (formats: j - JSON (default), s - Serialized php, p - PHP array)
+	-h -- show this screen
+	-v -- print version
+
+	Example: $script -d sqlite3:///./db.sqlite > struct.json
 
 HELP;
 

@@ -1,15 +1,19 @@
-#!/usr/bin/php
 <?php
 	/*
 		ffaker.php - runner script for FFaker
 
 		This file is part of ffaker.phar project
 	*/
-	define('CALL_SCRIPT_NAME', $argv[0]);
+	define('CALL_SCRIPT_NAME', basename($argv[0]));
 
-	require_once(__DIR__ . '/autoload.php');
-	require_once('helpers/fs.php');
-	
+	$libsPath = Phar::running();
+
+	if(trim($libsPath) == '')
+		$libsPath = __DIR__;
+
+	require_once($libsPath . '/autoload.php');
+	require_once($libsPath . '/helpers/fs.php');
+
 	$db_config = $structure = $words = null;
 	$interactive = false;
 	$count = 0;
@@ -20,7 +24,7 @@
 
 	$structInputFormat = 'JSON';
 
-	$structInputFormats = require_once("var/ExportFormat.php");
+	$structInputFormats = require_once($libsPath . "/var/ExportFormat.php");
 
 	$short = array(
 		'd:',	// database connection config file
@@ -34,6 +38,11 @@
 	);
 
 	$options = getopt(implode('', $short), array());
+
+	if(!$options) {
+		echo "No valid arguments passed! Please see help screen with " . CALL_SCRIPT_NAME . " -h\n";
+		exit(1);
+	}
 
 	foreach($options as $option => $value) {
 
@@ -67,13 +76,14 @@
 				$count = $value;
 				break;
 			case 'h' :
-				print_ffaker_help($value);
+				print_ffaker_help($value, \ffaker\app\FFaker::version());
 				exit(0);
 			case 'v' :
 				echo "FFaker version [" . \ffaker\app\FFaker::version() . "]\n";
 				exit(0);
 			default:
-				break;
+				echo "Wrong option! Please see help screen with " . CALL_SCRIPT_NAME . " -h\n";
+				exit(1);
 		}
 	}
 
