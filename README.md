@@ -26,7 +26,7 @@ sudo make install # this command will copy builded ffaker.phar, ffaker-dump.phar
 
 ## ffaker-dump options
 
-* -d - database connection url (see [doctrine database url](http://docs.doctrine-project.org/projects/doctrine-dbal/en/* latest/reference/configuration.html#connecting-using-a-url) for details)
+* -d - database connection url (see [doctrine database url](http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url) for details)
 * -w - file to write dump (by default STDOUT)
 * -p - pack database config into out structure
 * -t - tables to export (format -t table1,table2,table3)
@@ -69,6 +69,6 @@ See the [USAGE.md](USAGE.md) to get more instructions.
 
 ## Contribute
 
-As you can see English is not my main language, so if you can help me with documentation.
+As you can see English is not my main language, so you can help me with documentation.
 
 Also you can open issue [here](https://github.com/ikenfin/ffaker2/issues), and i open to your PR's!

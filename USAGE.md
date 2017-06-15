@@ -61,7 +61,7 @@ For now ffaker2 support only one shortcode - `pk` - that will be replaced with n
 
 `field_size` is a field size (for ex.: for VARCHAR(80) field_size will be 80), 
 
-**you can use lower values - field_size used in value generator as value lenth.**
+**you can use lower values - field_size used in value generator as value length.**
 
 NAMED OPTIONS are:
 
@@ -147,4 +147,4 @@ For now you can use only one operation in field.
 )
 ```
 
-Calculated fields can use values from other fields or from fields of related tables. In example above, we get value of level attribute in related table, and inrement it.
+Calculated fields can use values from other fields or from fields of related tables. In example above, we get value of level attribute in related table, and increment it.
