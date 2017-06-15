@@ -59,9 +59,10 @@ build_all: prepare_php
 # Preparing php scripts for phar building
 prepare_php: prepare_build
 	echo "Prepare PHP scripts . . ."
-	for file in $(shell find `pwd`/pre_build | grep .php\$$) ; do \
-		`cat $$file | sed -e /^#\!.usr.*php\$$/d | tee $$file > /dev/null` ; \
-	done
+	# it was unstable, so i removed that for time
+	# for file in $(shell find `pwd`/pre_build | grep .php\$$) ; do \
+	# 	`cat $$file | sed -e /^#\!.usr.*php\$$/d | tee $$file > /dev/null` ; \
+	# done
 
 	# install composer into test dir
 	cd pre_build/ && \
